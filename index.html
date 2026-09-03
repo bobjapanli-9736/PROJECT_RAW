@@ -109,6 +109,7 @@ button.dark:hover{filter:brightness(1.35)}
 #posterTitle{font-size:calc(var(--titleFs) * var(--u) * var(--tk,1));font-weight:900;line-height:1.14;
   text-align:center;letter-spacing:.5px;white-space:pre-line;min-width:0;max-width:100%}
 #posterTitle .mo{color:inherit}
+#tagline{display:none}
 
 /* ---- 月曆 ---- */
 #calwrap{position:relative;z-index:2;flex:1;min-height:0;display:flex;flex-direction:column;
@@ -243,6 +244,50 @@ button.dark:hover{filter:brightness(1.35)}
   padding:calc(26px * var(--u)) calc(20px * var(--u)) calc(18px * var(--u))}
 .tpl-pop.hdr-center #posterTitle{text-align:center}
 .tpl-pop.hdr-center #weekdays{border-top:calc(2px * var(--u)) solid var(--ink)}
+
+/* ============ 版型 7／8：Cwan design（共同基底） ============ */
+#poster.tpl-cwan1,#poster.tpl-cwan2{
+  --ink:#1E2B4D; --accent:#D91B5C; --headBg:#FF3B6F; --headInk:#FFFFFF;
+  --line:#1E2B4D; --lineW:2px; --lineStyle:solid;
+  --logoH:200px; --titleFs:66px; --wdFs:38px; --dayFs:34px; --timeFs:24px; --evFs:27px}
+#poster.tpl-cwan1.pal-pink,#poster.tpl-cwan2.pal-pink{--bg:#FDD8E1}
+#poster.tpl-cwan1.pal-grad,#poster.tpl-cwan2.pal-grad{--bg:linear-gradient(180deg,#FFF0F5 0%,#FDD8E1 55%,#FFC2D6 100%)}
+.tpl-cwan1 #phead,.tpl-cwan2 #phead{align-items:center;justify-content:space-between;gap:calc(20px * var(--u))}
+.tpl-cwan1 #titlebox,.tpl-cwan2 #titlebox{flex-direction:column;justify-content:center}
+/* 深藍字 ＋ 白色立體外框 */
+.tpl-cwan1 #posterTitle,.tpl-cwan2 #posterTitle{color:var(--ink);letter-spacing:2px;
+  text-shadow:
+    calc(3px * var(--u)) 0 0 #fff, calc(-3px * var(--u)) 0 0 #fff,
+    0 calc(3px * var(--u)) 0 #fff, 0 calc(-3px * var(--u)) 0 #fff,
+    calc(3px * var(--u)) calc(3px * var(--u)) 0 #fff, calc(-3px * var(--u)) calc(3px * var(--u)) 0 #fff,
+    calc(3px * var(--u)) calc(-3px * var(--u)) 0 #fff, calc(-3px * var(--u)) calc(-3px * var(--u)) 0 #fff,
+    calc(7px * var(--u)) calc(7px * var(--u)) 0 rgba(30,43,77,.22)}
+.tpl-cwan1 .cell .head,.tpl-cwan2 .cell .head{justify-content:flex-start}
+.tpl-cwan1 .cell .ev.hl,.tpl-cwan2 .cell .ev.hl{color:var(--headBg)}
+.tpl-cwan1 .cell.hol .day,.tpl-cwan2 .cell.hol .day{color:var(--headBg)}
+.tpl-cwan2 .cell.hol{background:#FFF1F5}
+.tpl-cwan1 #deco,.tpl-cwan2 #deco{z-index:3}
+
+/* ---- 版型 7：手繪塗鴉風（連續桃紅標頭列 ＋ 白色大卡片） ---- */
+#poster.tpl-cwan1{--panelBw:4px;--panelBc:#1E2B4D;--panelR:26px;
+  padding:calc(30px * var(--u)) calc(46px * var(--u)) calc(40px * var(--u))}
+.tpl-cwan1 #phead{padding:0 calc(var(--W) * .055)}
+.tpl-cwan1 #weekdays div:not(:first-child){border-left:calc(2px * var(--u)) solid rgba(255,255,255,.9)}
+.tpl-cwan1 #weekdays{border-bottom:calc(3px * var(--u)) solid var(--ink)}
+
+/* ---- 版型 8：運動吉祥物風（獨立桃紅膠囊標頭 ＋ 白色網格卡片） ---- */
+#poster.tpl-cwan2{--panelBw:0px;--panelBc:transparent;--panelR:0px;--titleFs:60px;--logoH:170px;
+  padding:calc(26px * var(--u)) calc(44px * var(--u)) calc(56px * var(--u))}
+.tpl-cwan2 #phead{padding:0 calc(var(--W) * .075) 0 calc(var(--W) * .015)}
+.tpl-cwan2 #tagline{display:block;color:var(--ink);font-weight:900;letter-spacing:.30em;
+  font-size:calc(26px * var(--u));margin-top:calc(6px * var(--u))}
+.tpl-cwan2 #calwrap{background:transparent;border:0;border-radius:0;overflow:visible;
+  margin-top:calc(8px * var(--u))}
+.tpl-cwan2 #weekdays{background:transparent;gap:calc(10px * var(--u));margin-bottom:calc(10px * var(--u))}
+.tpl-cwan2 #weekdays div{background:var(--headBg);color:var(--headInk);
+  border:calc(3px * var(--u)) solid var(--ink);border-radius:calc(13px * var(--u))}
+.tpl-cwan2 #grid{background:#fff;border:calc(4px * var(--u)) solid var(--ink);
+  border-radius:calc(20px * var(--u));overflow:hidden}
 </style>
 </head>
 <body>
@@ -362,7 +407,7 @@ button.dark:hover{filter:brightness(1.35)}
         <div id="deco"></div>
         <div id="phead">
           <div id="brand"><img id="logoImg" alt="logo"></div>
-          <div id="titlebox"><div id="posterTitle"></div></div>
+          <div id="titlebox"><div id="posterTitle"></div><div id="tagline">PLAY • FUN • LEARN</div></div>
         </div>
         <div id="calwrap">
           <div id="weekdays"></div>
@@ -421,7 +466,9 @@ const TEMPLATES = {
   panel   : {name:'粉紅面板',  note:'深藍標題條',    ratio:'16:9', week:'zh', sw:'linear-gradient(180deg,#FFD8E5,#FF9EC0)'},
   portrait: {name:'直式 9:16', note:'手機觀看',      ratio:'9:16', week:'zh', sw:'linear-gradient(180deg,#FFEAF1,#FFAECD)'},
   dashed  : {name:'虛線白框',  note:'柔和虛線分隔',  ratio:'16:9', week:'zh', sw:'linear-gradient(180deg,#FFF0F5,#FFC2D8)'},
-  pop     : {name:'粉色普普卡片',note:'白卡片＋幾何點綴',ratio:'4:3', week:'en', sw:'#FFAEC9'}
+  pop     : {name:'粉色普普卡片',note:'白卡片＋幾何點綴',ratio:'4:3', week:'en', sw:'#FFAEC9'},
+  cwan1   : {name:'Cwan design 1',note:'手繪塗鴉風',   ratio:'4:3', week:'zh', sw:'linear-gradient(180deg,#FDD8E1 60%,#FF3B6F)'},
+  cwan2   : {name:'Cwan design 2',note:'運動吉祥物風', ratio:'4:3', week:'zh', sw:'linear-gradient(180deg,#FFE7EE 60%,#FF3B6F)'}
 };
 /* u = 版面刻度（字級 / 間距 / 邊框的基準）；logo = Logo 額外倍率 */
 const RATIOS = {
@@ -460,8 +507,122 @@ const DECOS = {
     {e:'✨',x:0.2,y:18,s:.028,r:0},{e:'⭐',x:97,y:22,s:.028,r:0},{e:'💗',x:97,y:88,s:.028,r:0},
     {e:'⭐',x:0.2,y:92,s:.030,r:0}
   ],
-  pop : []   /* 普普版用向量幾何圖層，見 popDecoSVG() */
+  pop : [], cwan1 : [], cwan2 : []   /* 這三款用向量圖層，見下方 GEO 產生器 */
 };
+
+/* ---- 共用 SVG 基本圖形 ---- */
+const SVG = {
+  star(cx,cy,R,fill,stroke,sw){
+    const p=[];
+    for(let i=0;i<10;i++){
+      const r = i%2 ? R*0.44 : R, a = -Math.PI/2 + i*Math.PI/5;
+      p.push(`${(cx+r*Math.cos(a)).toFixed(1)},${(cy+r*Math.sin(a)).toFixed(1)}`);
+    }
+    return `<polygon points="${p.join(' ')}" fill="${fill}"`+
+           (stroke?` stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round"`:'')+`/>`;
+  },
+  heart(cx,cy,r,fill,stroke,sw){
+    const d=`M ${cx} ${cy+r*0.82} C ${cx-r*1.35} ${cy-r*0.30} ${cx-r*0.58} ${cy-r*1.15} ${cx} ${cy-r*0.34}`+
+            ` C ${cx+r*0.58} ${cy-r*1.15} ${cx+r*1.35} ${cy-r*0.30} ${cx} ${cy+r*0.82} Z`;
+    return `<path d="${d}" fill="${fill}"`+
+           (stroke?` stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round"`:'')+`/>`;
+  },
+  spark(cx,cy,r,fill){   // 四角星光
+    const d=`M ${cx} ${cy-r} Q ${cx+r*0.18} ${cy-r*0.18} ${cx+r} ${cy}`+
+            ` Q ${cx+r*0.18} ${cy+r*0.18} ${cx} ${cy+r}`+
+            ` Q ${cx-r*0.18} ${cy+r*0.18} ${cx-r} ${cy}`+
+            ` Q ${cx-r*0.18} ${cy-r*0.18} ${cx} ${cy-r} Z`;
+    return `<path d="${d}" fill="${fill}"/>`;
+  },
+  plus(cx,cy,r,c,w){
+    return `<path d="M ${cx-r} ${cy} H ${cx+r} M ${cx} ${cy-r} V ${cy+r}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`;
+  },
+  dot(cx,cy,r,c){ return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${c}"/>`; },
+  wrap(W,H,body){ return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${body}</svg>`; }
+};
+
+/* ---- Template 7：Cwan design 1 — 手繪塗鴉裝飾 ---- */
+function cwan1DecoSVG(W,H){
+  const NAVY='#1E2B4D', PINK='#FF5C8F', HOT='#FF3B6F', s=W/1600, P=[];
+  const dash=(d,c,w,pat)=>P.push(`<path d="${d}" fill="none" stroke="${c}" stroke-width="${w*s}" `+
+    `stroke-linecap="round" stroke-dasharray="${pat}"/>`);
+
+  // 左上：黑框白星 + 虛線筆觸 + 粉點
+  P.push(SVG.star(0.032*W, 0.070*H, 54*s, '#FFFFFF', NAVY, 6*s));
+  dash(`M ${0.075*W} ${0.020*H} q ${0.045*W} ${0.030*H} ${0.020*W} ${0.075*H}`, NAVY, 4, `${10*s} ${12*s}`);
+  P.push(SVG.dot(0.100*W,0.017*H,7*s,PINK), SVG.dot(0.086*W,0.140*H,6*s,PINK), SVG.dot(0.012*W,0.170*H,5*s,PINK));
+
+  // 右上：粉紅愛心 + 點
+  P.push(SVG.heart(0.962*W, 0.072*H, 40*s, HOT, NAVY, 6*s));
+  P.push(SVG.dot(0.905*W,0.028*H,7*s,PINK), SVG.dot(0.918*W,0.150*H,6*s,PINK));
+  dash(`M ${0.880*W} ${0.055*H} q ${-0.030*W} ${0.040*H} ${0.006*W} ${0.080*H}`, NAVY, 4, `${10*s} ${12*s}`);
+
+  // 左下：黑框白星 + 小愛心
+  P.push(SVG.star(0.030*W, 0.930*H, 46*s, '#FFFFFF', NAVY, 6*s));
+  P.push(SVG.heart(0.092*W, 0.975*H, 22*s, HOT, NAVY, 5*s));
+  P.push(SVG.dot(0.015*W,0.845*H,6*s,PINK), SVG.dot(0.150*W,0.988*H,6*s,PINK));
+
+  // 右下：粉紅愛心 + 小白星
+  P.push(SVG.heart(0.958*W, 0.938*H, 38*s, HOT, NAVY, 6*s));
+  P.push(SVG.star(0.888*W, 0.985*H, 24*s, '#FFFFFF', NAVY, 5*s));
+  P.push(SVG.dot(0.988*W,0.845*H,6*s,PINK), SVG.dot(0.820*W,0.990*H,6*s,PINK));
+
+  // 上緣中央的手繪點點
+  for(let i=0;i<4;i++) P.push(SVG.dot((0.30+i*0.14)*W, (0.012+(i%2)*0.014)*H, 6*s, PINK));
+  return SVG.wrap(W,H,P.join(''));
+}
+
+/* ---- Template 8：Cwan design 2 — 吉祥物 / 啞鈴 / 匹克球拍 ---- */
+function cwan2DecoSVG(W,H){
+  const NAVY='#1E2B4D', HOT='#FF3B6F', PINK='#FF7FA8', SOFT='#FFB3C8', GOLD='#FFD24D', s=W/1600, P=[];
+
+  // 右上角吉祥物
+  const mx=0.936*W, my=0.108*H, k=s*1.05;
+  P.push(`<g transform="translate(${mx} ${my}) scale(${k})">`+
+    `<path d="M -52 -12 q -30 -10 -34 -34" fill="none" stroke="${NAVY}" stroke-width="6" stroke-linecap="round"/>`+
+    `<path d="M 52 -12 q 30 -10 34 -34" fill="none" stroke="${NAVY}" stroke-width="6" stroke-linecap="round"/>`+
+    `<circle cx="0" cy="0" r="58" fill="${HOT}" stroke="${NAVY}" stroke-width="6"/>`+
+    `<ellipse cx="0" cy="6" rx="41" ry="36" fill="#FFFFFF"/>`+
+    `<ellipse cx="-25" cy="14" rx="9" ry="6" fill="${SOFT}"/>`+
+    `<ellipse cx="25" cy="14" rx="9" ry="6" fill="${SOFT}"/>`+
+    `<circle cx="-14" cy="2" r="5" fill="${NAVY}"/><circle cx="14" cy="2" r="5" fill="${NAVY}"/>`+
+    `<path d="M -8 16 q 8 9 16 0" fill="none" stroke="${NAVY}" stroke-width="4.5" stroke-linecap="round"/>`+
+    SVG.heart(0,-82,17,HOT,NAVY,5)+
+    SVG.spark(-44,-72,11,GOLD)+
+  `</g>`);
+
+  // 左下角粉紅啞鈴
+  const dx=0.058*W, dy=0.948*H;
+  P.push(`<g transform="translate(${dx} ${dy}) rotate(-22) scale(${s})">`+
+    `<rect x="-40" y="-8" width="80" height="16" rx="8" fill="${PINK}" stroke="${NAVY}" stroke-width="5"/>`+
+    `<rect x="-60" y="-23" width="21" height="46" rx="9" fill="${HOT}" stroke="${NAVY}" stroke-width="5"/>`+
+    `<rect x="39" y="-23" width="21" height="46" rx="9" fill="${HOT}" stroke="${NAVY}" stroke-width="5"/>`+
+    `<rect x="-77" y="-15" width="17" height="30" rx="8" fill="${PINK}" stroke="${NAVY}" stroke-width="5"/>`+
+    `<rect x="60" y="-15" width="17" height="30" rx="8" fill="${PINK}" stroke="${NAVY}" stroke-width="5"/>`+
+  `</g>`);
+
+  // 右下角匹克球拍 + 洞洞球
+  const px=0.946*W, py=0.944*H;
+  P.push(`<g transform="translate(${px} ${py}) rotate(22) scale(${s})">`+
+    `<rect x="-12" y="26" width="24" height="62" rx="11" fill="${NAVY}"/>`+
+    `<rect x="-17" y="70" width="34" height="20" rx="9" fill="${HOT}" stroke="${NAVY}" stroke-width="5"/>`+
+    `<ellipse cx="0" cy="-16" rx="46" ry="54" fill="${PINK}" stroke="${NAVY}" stroke-width="6"/>`+
+    `<ellipse cx="0" cy="-16" rx="30" ry="37" fill="none" stroke="${HOT}" stroke-width="5"/>`+
+  `</g>`);
+  P.push(`<g transform="translate(${0.878*W} ${0.980*H}) scale(${s})">`+
+    `<circle cx="0" cy="0" r="26" fill="#FFFFFF" stroke="${NAVY}" stroke-width="5"/>`+
+    [[-11,-8],[9,-10],[0,3],[-9,12],[12,9]].map(([a,b])=>`<circle cx="${a}" cy="${b}" r="4" fill="${NAVY}"/>`).join('')+
+  `</g>`);
+
+  // 四角星光 / 黃色小星 / 十字
+  P.push(SVG.spark(0.030*W,0.075*H,26*s,GOLD), SVG.spark(0.885*W,0.030*H,18*s,'#FFFFFF'));
+  P.push(SVG.star(0.108*W,0.030*H,15*s,GOLD,NAVY,4*s), SVG.star(0.985*W,0.300*H,14*s,GOLD,NAVY,4*s));
+  P.push(SVG.star(0.014*W,0.300*H,13*s,GOLD,NAVY,4*s), SVG.star(0.760*W,0.985*H,14*s,GOLD,NAVY,4*s));
+  P.push(SVG.plus(0.822*W,0.108*H,13*s,NAVY,5*s), SVG.plus(0.020*W,0.640*H,12*s,NAVY,5*s));
+  P.push(SVG.plus(0.982*W,0.640*H,12*s,NAVY,5*s), SVG.plus(0.220*W,0.988*H,12*s,NAVY,5*s));
+  P.push(SVG.dot(0.986*W,0.470*H,7*s,HOT), SVG.dot(0.016*W,0.470*H,7*s,HOT));
+  return SVG.wrap(W,H,P.join(''));
+}
 
 /* ---- Template 6：普普風幾何點綴（輸出成 data:URI 圖片，兩種匯出引擎都能忠實重現） ---- */
 function popDecoSVG(W,H){
@@ -499,8 +660,11 @@ function popDecoSVG(W,H){
   for(let r=0;r<2;r++) for(let c=0;c<5;c++) dot((0.60*W)+c*20*s,(0.966*H)+r*20*s,4.2*s,ink);
   stroke(waveH(0.80*W, 0.978*H, 0.10*W, 0.009*H, 3), ink, 4);
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${P.join('')}</svg>`;
+  return SVG.wrap(W,H,P.join(''));
 }
+
+/* 版型 → 向量裝飾圖層產生器 */
+const GEO = { pop:popDecoSVG, cwan1:cwan1DecoSVG, cwan2:cwan2DecoSVG };
 
 /* =========================================================
    3. 預設行程（2026 年 9 月）
@@ -648,11 +812,12 @@ function applyShell(){
 function renderDeco(){
   deco.innerHTML = '';
   if(!state.deco) return;
-  if(state.tpl === 'pop'){
+  const gen = GEO[state.tpl];
+  if(gen){
     const R = RATIOS[state.ratio];
     const img = document.createElement('img');
     img.className = 'geo'; img.alt = '';
-    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(popDecoSVG(R.w, R.h));
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(gen(R.w, R.h));
     deco.appendChild(img);
   }
   (DECOS[state.tpl]||[]).forEach(d=>{
@@ -723,6 +888,8 @@ function renderCalendar(){
       const tm=document.createElement('span'); tm.className='time'; tm.textContent=evs[0].t; head.appendChild(tm);
     }
     cell.appendChild(head);
+
+    if(evs.some(e=>e.hl)) cell.classList.add('hol');   // 節日格：日期數字一併強調
 
     const body = document.createElement('div'); body.className='body';
     evs.forEach((e,idx)=>{
